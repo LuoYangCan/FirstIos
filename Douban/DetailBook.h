@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-static const NSString * addurl =@"https://book.douban.com/subject/";
 @interface DetailBook : UIViewController
 @property(nonatomic,strong) NSString *url;
 @end

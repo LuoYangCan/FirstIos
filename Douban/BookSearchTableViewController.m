@@ -14,7 +14,7 @@
 @interface BookSearchTableViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBook;
 @property (strong,nonatomic) NSMutableArray *searchResults;
-
+@property (strong,nonatomic) NSDictionary *touchmessage;
 @end
 
 @implementation BookSearchTableViewController
@@ -40,18 +40,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-//点击搜索结果跳转
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"showDetailBook"]) {
-        DetailBook *detailbookVC = segue.destinationViewController;
-        NSInteger selectindex = [[self.tableView indexPathForSelectedRow]row];
-        NSDictionary * dict = [self.searchResults objectAtIndex:selectindex];
-        NSString *bookid = [dict objectForKey:@"bookid"];
-        detailbookVC.url = [NSString stringWithFormat:@"https://book.douban.com/subject/%@",bookid];
-        
-        
-    }
-}
+
 #pragma mark - UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     self.searchBook.showsScopeBar = NO;              //点击后取消第一响应
@@ -77,8 +66,12 @@
                     Item.bookid =bookid;
                     Item.bookname = bookname;
                     Item.author = authorname;
-//                     NSLog(@"获取到的作者名是%@",Item.bookname);
-                     [self.searchResults addObject:Item]; //将这些信息传给searchResults
+//                    NSLog(@"获取到的作者名是%@",Item.bookname);    //将这些信息传给searchResults
+
+                     [self.searchResults addObject:Item];
+//                    [self.touchmessage  setValue:bookid forKey:@"bookid"];
+//                    [self.touchmessage setValue:bookname forKey:@"title"];
+//                    [self.touchmessage setValue:authorname forKey:@"author"];
                 }];
                 [self.tableView reloadData];
            }
@@ -103,7 +96,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellIdentifier" forIndexPath:indexPath];
     BooksItem *Item = self.searchResults[indexPath.row];
     NSString *text = [NSString stringWithFormat:@"%@",Item.bookname];
-//    NSString *atext = [NSString stringWithFormat:@"%@",Item.author];
+
     
     cell.textLabel.text = text;
 //    cell.detailTextLabel.text = atext;
@@ -113,9 +106,56 @@
 }
 
 
+#pragma mark - search
+//点击搜索结果跳转
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showDetailBook"]) {
+        DetailBook *detailBook = [segue destinationViewController];
+        NSInteger selectindex = [[self.tableView indexPathForSelectedRow]row];
+//        NSMutableArray * resultsarray = [self.searchResults objectAtIndex:selectindex];
+//        NSLog(@"dict的数据是这样%@",resultsarray);
+        BooksItem *Item1 = [self.searchResults objectAtIndex:selectindex];
+        detailBook.url = [NSString stringWithFormat:@"https://book.douban.com/subject/%@",Item1.bookid];
+//        NSLog(@"%@",detailbookVC.url);
+//                NSLog(@"执行了这一句了吗%@",detailBook.url);
+    }
+}
+#pragma mark - 实时搜索
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if (searchText.length > 0) {
+        NSString * encodeSearchText = [searchText stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        NSString *URLText = [NSString stringWithFormat:@"book/search?q=%@&limit=20",encodeSearchText];
+        [[NetworkHelper SharedHttpManager]GET:URLText parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            if (responseObject != nil) {
+                NSDictionary *dict = responseObject;
+                NSArray *booklist = dict[@"books"];
+                [self.searchResults removeAllObjects];
+                
+                [booklist enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    NSDictionary *booksdict = obj;
+                    BooksItem * Item = [[BooksItem alloc]init];       //获取名字 ID与作者
+                    NSString *bookid = booksdict[@"id"];
+                    NSString *bookname = booksdict[@"title"];
+                    NSString *authorname = booksdict[@"author"];
+                    Item.bookid =bookid;
+                    Item.bookname = bookname;
+                    Item.author = authorname;
+                    //                    NSLog(@"获取到的作者名是%@",Item.bookname);    //将这些信息传给searchResults
+                    
+                    [self.searchResults addObject:Item];
+//                    [self.touchmessage  setValue:bookid forKey:@"bookid"];
+//                    [self.touchmessage setValue:bookname forKey:@"title"];
+//                    [self.touchmessage setValue:authorname forKey:@"author"];
+                }];
+                [self.tableView reloadData];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+        }];
+    }
 
-
-
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

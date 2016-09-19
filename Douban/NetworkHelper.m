@@ -18,5 +18,14 @@ static NSString *const DoubanAPI = @"https://api.douban.com/v2/";
     });
     return _sharedClient;
 }
-
++ (void)placeGetRequest:(NSString *)action withHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))ourBlock {
+    
+    NSString *urlString = [NSString stringWithFormat:@"https://api.douban.com/v2/movie/search?q=%@", action];
+    
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:ourBlock] resume];
+}
 @end

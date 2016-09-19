@@ -32,6 +32,15 @@
 - (IBAction)DoubanMovie:(id)sender {
 }
 
+- (IBAction)Goback:(id)sender {
+    if (self.BookWeb.canGoBack) {
+        [self.BookWeb goBack];
 
+    }
+}
+
+- (IBAction)Refresh:(id)sender {
+    [self.BookWeb reload];
+}
 
 @end

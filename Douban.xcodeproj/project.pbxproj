@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		681320FC1D4072CF005460AB /* BooksItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 681320FB1D4072CF005460AB /* BooksItem.m */; };
+		68378DC41D7E553F00D6B9A7 /* movieSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 68378DC31D7E553F00D6B9A7 /* movieSearch.m */; };
+		6852C6561D525396001B5072 /* MovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6852C6551D525396001B5072 /* MovieViewController.m */; };
 		6885B86E1D3F5EE40045E216 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6885B86D1D3F5EE40045E216 /* main.m */; };
 		6885B8711D3F5EE40045E216 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6885B8701D3F5EE40045E216 /* AppDelegate.m */; };
 		6885B8741D3F5EE40045E216 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6885B8731D3F5EE40045E216 /* ViewController.m */; };
@@ -37,6 +39,10 @@
 /* Begin PBXFileReference section */
 		681320FA1D4072CF005460AB /* BooksItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksItem.h; sourceTree = "<group>"; };
 		681320FB1D4072CF005460AB /* BooksItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksItem.m; sourceTree = "<group>"; };
+		68378DC21D7E553F00D6B9A7 /* movieSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = movieSearch.h; sourceTree = "<group>"; };
+		68378DC31D7E553F00D6B9A7 /* movieSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = movieSearch.m; sourceTree = "<group>"; };
+		6852C6541D525396001B5072 /* MovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieViewController.h; sourceTree = "<group>"; };
+		6852C6551D525396001B5072 /* MovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieViewController.m; sourceTree = "<group>"; };
 		6885B8691D3F5EE40045E216 /* Douban.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Douban.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6885B86D1D3F5EE40045E216 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6885B86F1D3F5EE40045E216 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -118,10 +124,10 @@
 		6885B86B1D3F5EE40045E216 /* Douban */ = {
 			isa = PBXGroup;
 			children = (
+				6852C6541D525396001B5072 /* MovieViewController.h */,
+				6852C6551D525396001B5072 /* MovieViewController.m */,
 				6885B8721D3F5EE40045E216 /* ViewController.h */,
 				6885B8731D3F5EE40045E216 /* ViewController.m */,
-				6885B8C41D3F865A0045E216 /* BookSearchTableViewController.h */,
-				6885B8C51D3F865A0045E216 /* BookSearchTableViewController.m */,
 				6885B8941D3F72BC0045E216 /* UIKit+AFNetworking */,
 				6885B8861D3F72BC0045E216 /* AFNetworking */,
 				6885B86C1D3F5EE40045E216 /* Supporting Files */,
@@ -132,6 +138,8 @@
 		6885B86C1D3F5EE40045E216 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6885B8C41D3F865A0045E216 /* BookSearchTableViewController.h */,
+				6885B8C51D3F865A0045E216 /* BookSearchTableViewController.m */,
 				6885B86F1D3F5EE40045E216 /* AppDelegate.h */,
 				6885B8701D3F5EE40045E216 /* AppDelegate.m */,
 				6885B8751D3F5EE40045E216 /* Main.storyboard */,
@@ -145,6 +153,8 @@
 				681320FB1D4072CF005460AB /* BooksItem.m */,
 				68EFD7711D4368BF001C0872 /* DetailBook.h */,
 				68EFD7721D4368BF001C0872 /* DetailBook.m */,
+				68378DC21D7E553F00D6B9A7 /* movieSearch.h */,
+				68378DC31D7E553F00D6B9A7 /* movieSearch.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -273,6 +283,7 @@
 				6885B8B71D3F72BC0045E216 /* UIWebView+AFNetworking.m in Sources */,
 				6885B8B41D3F72BC0045E216 /* UIImageView+AFNetworking.m in Sources */,
 				6885B8741D3F5EE40045E216 /* ViewController.m in Sources */,
+				68378DC41D7E553F00D6B9A7 /* movieSearch.m in Sources */,
 				6885B8B31D3F72BC0045E216 /* UIButton+AFNetworking.m in Sources */,
 				6885B8711D3F5EE40045E216 /* AppDelegate.m in Sources */,
 				6885B8AA1D3F72BC0045E216 /* AFNetworkReachabilityManager.m in Sources */,
@@ -283,6 +294,7 @@
 				6885B8AC1D3F72BC0045E216 /* AFURLRequestSerialization.m in Sources */,
 				6885B8B11D3F72BC0045E216 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				6885B8AD1D3F72BC0045E216 /* AFURLResponseSerialization.m in Sources */,
+				6852C6561D525396001B5072 /* MovieViewController.m in Sources */,
 				6885B8C61D3F865A0045E216 /* BookSearchTableViewController.m in Sources */,
 				6885B8A91D3F72BC0045E216 /* AFHTTPSessionManager.m in Sources */,
 				6885B8B01D3F72BC0045E216 /* AFImageDownloader.m in Sources */,

@@ -10,4 +10,5 @@
 #import "AFNetworking.h"
 @interface NetworkHelper : NSObject
 + (AFHTTPSessionManager *) SharedHttpManager;
++ (void)placeGetRequest:(NSString *)action withHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))ourBlock ;
 @end
